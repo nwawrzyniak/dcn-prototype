@@ -4,8 +4,13 @@
     z-index: 0;
 }
 
-body {
-    /*overflow: hidden;*/
+a:link,
+a:visited,
+a:active,
+a:hover {
+    text-decoration: none;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
 }
 
 .desk_pane {
@@ -22,10 +27,6 @@ body {
     width: 7vw;
     height: 7vw;
     cursor: pointer;
-}
-
-.overlay {
-    pointer-events: none;
 }
 
 .overlay > div {
