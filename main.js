@@ -76,8 +76,8 @@ function onLoad() {
         const point3Y = 0.6;
         const point4X = 0.2;
         const point4Y = 0.3;
-        const point5X = 0.8;
-        const point5Y = 0.2;
+        const point5X = 0.75;
+        const point5Y = 0.25;
 
         overlay1.style.left = width * point1X + rect.left + 'px';
         overlay1.style.top = height * point1Y + 'px';
