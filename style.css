@@ -1,67 +1,40 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
 body {
-    margin: 0;
+    /*overflow: hidden;*/
 }
 
-/*
-.table_pane {
-    margin-top: 5vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    width: 90vw;
-    height: 80vh;
-    background-image: url(./images/table2.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-*/
-
-.table_pane {
-    width: 100vw;
-    height: 98vh;
-    background-image: url(./images/table2.png);
-    background-size: contain;
-    background-repeat: no-repeat;
+.desk_pane {
+    display: block;
+    margin: auto;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
-.table_object {
+.circle div {
     position: absolute;
-    transform: rotate(10deg);
+    background: black;
+    border-radius: 7vw;
+    width: 7vw;
+    height: 7vw;
+    cursor: pointer;
 }
 
-.info_box {
+.overlay {
+    pointer-events: none;
+}
+
+.overlay > div {
+    position: absolute;
+    padding: 5px 10px;
     display: none;
-    position: relative;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
     font-size: 4vw;
-    background-color: grey;
-    width: 30vw;
 }
 
-.info_box p {
-    margin: 0;
-}
-
-#screenteens {
-    top: 10%;
-    left: 20%;
-    width: 10vw;
-}
-
-#screen_teens_box {
-    top: 10%;
-    left: 40vw;
-}
-
-.table_object:hover {
-    animation-duration: 0.3s;
-    animation-name: turnitem;
-    animation-fill-mode: forwards;
-}
-
-@keyframes turnitem {
-    0% {
-        transform: rotate(10deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
