@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+}
+
+.table_pane {
+    margin-top: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    width: 90vw;
+    height: 80vh;
+    background-image: url(./images/table2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.table_object {
+    position: absolute;
+    transform: rotate(10deg);
+}
+
+.info_box {
+    display: none;
+    position: relative;
+    font-size: 4vw;
+    background-color: grey;
+    width: 30vw;
+}
+
+
+#screenteens {
+    top: 30vh;
+    left: 20vw;
+    height: 20vmin;
+}
+
+#screen_teens_box {
+    top: 30vh;
+    left: 40vw;
+}
+
+.table_object:hover {
+    animation-duration: 0.3s;
+    animation-name: turnitem;
+    animation-fill-mode: forwards;
+}
+
+@keyframes turnitem {
+    0% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
