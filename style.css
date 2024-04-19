@@ -36,6 +36,9 @@ body {
     width: 30vw;
 }
 
+.info_box p {
+    margin: 0;
+}
 
 #screenteens {
     top: 10%;
@@ -44,7 +47,7 @@ body {
 }
 
 #screen_teens_box {
-    top: 30vh;
+    top: 10%;
     left: 40vw;
 }
 
