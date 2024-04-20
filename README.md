@@ -1,3 +1,3 @@
-# kdg-prototype
+# dcn-prototype
 
-Prototyping for #kids #digital #genial
+Prototyping for Digital Check NRW
