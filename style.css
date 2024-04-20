@@ -30,7 +30,7 @@ a:hover {
 
 .overlay > div {
     position: absolute;
-    padding: 5px 10px;
+    padding: 5px 20px;
     display: none;
     border-radius: 10px;
     background-color: black;
