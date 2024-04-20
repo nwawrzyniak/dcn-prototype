@@ -1,5 +1,5 @@
 function onLoad() {
-    const deskImage = document.querySelector("img");
+    const deskImage = document.querySelector(".desk_pane");
     const circle1 = document.querySelector("#circle1");
     const circle2 = document.querySelector("#circle2");
     const circle3 = document.querySelector("#circle3");
@@ -60,9 +60,6 @@ function onLoad() {
         circle5.style.top = height * point5Y + 'px';
     }
 
-    window.addEventListener("resize", positionCircles);
-    positionCircles();
-
     function positionOverlays() {
         const rect = deskImage.getBoundingClientRect();
         const width = rect.width;
@@ -90,8 +87,9 @@ function onLoad() {
         overlay5.style.left = width * point5X + rect.left + 'px';
         overlay5.style.top = height * point5Y + 'px';
     }
-
+    window.addEventListener("resize", positionCircles);
     window.addEventListener("resize", positionOverlays);
+    positionCircles();
     positionOverlays();
 }
 

@@ -1,7 +1,6 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    z-index: 0;
 }
 
 a:link,
@@ -20,7 +19,7 @@ a:hover {
     max-height: 100vh;
 }
 
-.circle div {
+.circle > div {
     position: absolute;
     background: black;
     border-radius: 7vw;
