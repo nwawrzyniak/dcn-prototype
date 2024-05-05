@@ -22,9 +22,9 @@ a:hover {
 .circle > div {
     position: absolute;
     background: black;
-    border-radius: 7vw;
-    width: 7vw;
-    height: 7vw;
+    border-radius: 6vw;
+    width: 6vw;
+    height: 6vw;
     cursor: pointer;
 }
 
