@@ -29,6 +29,16 @@ function onLoad() {
         return toggle;
     }
 
+    function deactivateOverlays() {
+        function deactivate() {
+            if (current != null) {
+                current.style.display = "";
+                current = null;
+            }
+        }
+        return deactivate;
+    }
+
     circle1.addEventListener('click', handleOverlay(overlay1));
     circle2.addEventListener('click', handleOverlay(overlay2));
     circle3.addEventListener('click', handleOverlay(overlay3));
