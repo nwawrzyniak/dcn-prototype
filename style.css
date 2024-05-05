@@ -3,13 +3,36 @@
     box-sizing: border-box;
 }
 
+.back_bar {
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+
 a:link,
 a:visited,
 a:active,
 a:hover {
     text-decoration: none;
-    color: hsl(0, 0%, 100%);
     cursor: pointer;
+}
+
+.back_bar a:link,
+.back_bar a:visited,
+.back_bar a:active,
+.back_bar a:hover {
+    color: hsl(0, 0%, 0%);
+}
+
+.back_bar a:hover {
+    text-decoration: underline;
+}
+
+.overlay a:link,
+.overlay a:visited,
+.overlay a:active,
+.overlay a:hover {
+    color: hsl(0, 0%, 100%);
 }
 
 .desk_pane {
