@@ -28,21 +28,21 @@ a:hover {
     text-decoration: underline;
 }
 
-.overlay a:link,
-.overlay a:visited,
-.overlay a:active,
-.overlay a:hover {
-    color: hsl(0, 0%, 100%);
+.text a:link,
+.text a:visited,
+.text a:active,
+.text a:hover {
+    color: inherit;
 }
 
-.desk_pane {
+.bild_desktop {
     display: block;
     margin: auto;
     max-width: 100vw;
     max-height: 100vh;
 }
 
-.circle > div {
+.kreis {
     position: absolute;
     background: black;
     border-radius: 6vw;
@@ -51,7 +51,7 @@ a:hover {
     cursor: pointer;
 }
 
-.overlay > div {
+.text {
     position: absolute;
     padding: 5px 20px;
     display: none;

@@ -1,110 +1,138 @@
+/**
+ * name: information stand
+ * author: nwawrzyniak
+ * version: v1.0.0
+ * license: This software is part of the public domain. Have fun! ✌️
+ */
+
+/*
+ * Hallo Schwesterherz! <3
+ * Willkommen im Konfigurator deines digitalen Infostandes!
+ * 
+ * Wenn du in dieser Datei Änderungen vornehmen willst, solltest du folgende Dinge vorher erledigt haben:
+ * - Im HTML das Bild austauschen
+ * - Durchzählen, wie viele interaktive Elemente es geben wird
+ * - So viele Kreise im HTML anlegen
+ * - Die dazugehörigen Texte ("Overlays") im HTML anlegen
+ * 
+ * Wenn im HTML alles angepasst und vorbereitet ist, kann es losgehen! :)
+ */
+
+// ANFANG DES KONFIGURATIONS-BEREICHES
+
+/**
+ * Das ist der DEBUG-Flag.
+ * Wenn er auf true gesetzt ist, sind alle Boxen immer sichtbar. Dadurch kann man sie leichter positionieren.
+ * Ersetz hier also einfach false durch true, wenn du Elemente positionieren willst.
+ * Nach getaner Arbeit sollte dieser Flag wieder auf false gesetzt werden.
+ */
+const DEBUG = false;
+
+/**
+ * Hier kommen die Koordinaten der Kreise rein.
+ * Es sollte genau so viele Einträge geben, wie es interaktive Objekte gibt.
+ * Die Koordinaten sind im Format [X, Y] Werte zwischen 0 und 1.
+ * 0 im X-Feld heißt "ganz links", 1 im X-Feld heißt "ganz rechts". 
+ * 0 im Y-Feld heißt "ganz oben", 1 im Y-Feld heißt "ganz unten". 
+ */
+const kreisKoordinaten = [
+    [0.47, 0.80], // Flyer
+    [0.88, 0.63], // Mondlandung
+    [0.10, 0.70], // Erde ist Scheibe
+    [0.20, 0.15], // Digital Check
+    [0.90, 0.10] // Tablet
+];
+
+/**
+ * Hier kommen die Koordinaten der Texte rein.
+ * Alles funktioniert genau wie oben für die Kreise.
+ */
+const textKoordinaten = [
+    [0.55, 0.50], // Flyer
+    [0.57, 0.80], // Mondlandung
+    [0.18, 0.60], // Erde ist Scheibe
+    [0.20, 0.30], // Digital Check
+    [0.75, 0.25] // Tablet
+];
+
+// ENDE DES KONFIGURATIONS-BEREICHES
+
+/**
+ * So. Das war's auch schon! :)
+ * Speichern -> Seite aufrufen und das Ergebnis testen. Bei Bedarf die Werte anpassen.
+ * Wenn du zufrieden bist nicht vergessen den DEBUG-Flag wieder auf false zu setzen.
+ */
+
+// ENDE DES NUTZERFREUNDLICHEN BEREICHES
+
+// GEFAHRENGRENZE!
+// AB HIER NIX ANFASSEN!
+
 function onLoad() {
-    const deskImage = document.querySelector(".desk_pane");
+    const deskImage = document.querySelector(".bild_desktop");
     deskImage.onload = function () {
-        const circle1 = document.querySelector("#circle1");
-        const circle2 = document.querySelector("#circle2");
-        const circle3 = document.querySelector("#circle3");
-        const circle4 = document.querySelector("#circle4");
-        const circle5 = document.querySelector("#circle5");
-        // Für weiteren Kreis die obere Zeile kopieren und die Zahl an beiden Stellen um 1 erhöhen
-        const overlay1 = document.querySelector("#overlay1");
-        const overlay2 = document.querySelector("#overlay2");
-        const overlay3 = document.querySelector("#overlay3");
-        const overlay4 = document.querySelector("#overlay4");
-        const overlay5 = document.querySelector("#overlay5");
-        // Für weiteres Overlay die obere Zeile kopieren und die Zahl an beiden Stellen um 1 erhöhen
+        const circles = document.querySelectorAll(".kreis");
+        const overlays = document.querySelectorAll(".text");
         let current;
 
+        if (DEBUG) {
+            overlays.forEach(element => {
+                element.style.display = "inline-block";
+            });
+        }
+
         function handleOverlay(overlay) {
-            function toggle() {
-                if (current) {
-                    current.style.display = "";
-                    if (current === overlay) {
-                        current = null;
-                        return;
+            if (!DEBUG) {
+                function toggle() {
+                    if (current) {
+                        current.style.display = "none";
+                        if (current === overlay) {
+                            current = null;
+                            return;
+                        }
                     }
+                    current = overlay;
+                    current.style.display = "inline-block";
                 }
-                current = overlay;
-                current.style.display = "inline-block";
+                return toggle;
+            } else {
+                // ToDo
             }
-            return toggle;
         }
 
         function deactivateOverlays() {
-            function deactivate() {
-                if (current != null) {
-                    current.style.display = "";
-                    current = null;
-                }
+            if (current != null) {
+                current.style.display = "none";
+                current = null;
             }
-            return deactivate;
         }
 
-        circle1.addEventListener('click', handleOverlay(overlay1));
-        circle2.addEventListener('click', handleOverlay(overlay2));
-        circle3.addEventListener('click', handleOverlay(overlay3));
-        circle4.addEventListener('click', handleOverlay(overlay4));
-        circle5.addEventListener('click', handleOverlay(overlay5));
-        // Für weiteren Kreis mit zugehörigem Overlay die obere Zeile kopieren und die Zahl an beiden Stellen um 1 erhöhen
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].addEventListener("click", handleOverlay(overlays[i]));
+        }
 
-        deskImage.addEventListener('click', deactivateOverlays()); // Diese Zeile auskommentieren, damit ein Klick auf eine freie Fläche im Bild NICHT das aktuell geöffnete Overlay schließt
-
-        const circle1X = 0.47;
-        const circle1Y = 0.8;
-        const circle2X = 0.88;
-        const circle2Y = 0.63;
-        const circle3X = 0.1;
-        const circle3Y = 0.7;
-        const circle4X = 0.2;
-        const circle4Y = 0.15;
-        const circle5X = 0.9;
-        const circle5Y = 0.1;
-        // Für weiteren Kreis die zwei Zeilen über dieser kopieren, die Zahl im Namen um 1 erhöhen und die neuen Positionen angeben
-
-        const overlay1X = 0.55;
-        const overlay1Y = 0.5;
-        const overlay2X = 0.57;
-        const overlay2Y = 0.8;
-        const overlay3X = 0.18;
-        const overlay3Y = 0.6;
-        const overlay4X = 0.2;
-        const overlay4Y = 0.3;
-        const overlay5X = 0.75;
-        const overlay5Y = 0.25;
-        // Für weiteres Overlay die zwei Zeilen über dieser kopieren, die Zahl im Namen um 1 erhöhen und die neuen Positionen angeben
+        if (!DEBUG) {
+            deskImage.addEventListener("click", deactivateOverlays);
+        }
 
         function positionCircles() {
             const rect = deskImage.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
-            circle1.style.left = width * circle1X + rect.left + 'px';
-            circle1.style.top = height * circle1Y + 'px';
-            circle2.style.left = width * circle2X + rect.left + 'px';
-            circle2.style.top = height * circle2Y + 'px';
-            circle3.style.left = width * circle3X + rect.left + 'px';
-            circle3.style.top = height * circle3Y + 'px';
-            circle4.style.left = width * circle4X + rect.left + 'px';
-            circle4.style.top = height * circle4Y + 'px';
-            circle5.style.left = width * circle5X + rect.left + 'px';
-            circle5.style.top = height * circle5Y + 'px';
-            // Für weiteren Kreis die oberen zwei Zeilen kopieren und die Zahl an beiden Stellen um 1 erhöhen
+            for (let i = 0; i < circles.length; i++) {
+                circles[i].style.left = width * kreisKoordinaten[i][0] + rect.left + "px";
+                circles[i].style.top = height * kreisKoordinaten[i][1] + 'px';
+            }
         }
 
         function positionOverlays() {
             const rect = deskImage.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
-            overlay1.style.left = width * overlay1X + rect.left + 'px';
-            overlay1.style.top = height * overlay1Y + 'px';
-            overlay2.style.left = width * overlay2X + rect.left + 'px';
-            overlay2.style.top = height * overlay2Y + 'px';
-            overlay3.style.left = width * overlay3X + rect.left + 'px';
-            overlay3.style.top = height * overlay3Y + 'px';
-            overlay4.style.left = width * overlay4X + rect.left + 'px';
-            overlay4.style.top = height * overlay4Y + 'px';
-            overlay5.style.left = width * overlay5X + rect.left + 'px';
-            overlay5.style.top = height * overlay5Y + 'px';
-            // Für weiteres Overlay die oberen zwei Zeilen kopieren und die Zahl an beiden Stellen um 1 erhöhen
+            for (let i = 0; i < overlays.length; i++) {
+                overlays[i].style.left = width * textKoordinaten[i][0] + rect.left + "px";
+                overlays[i].style.top = height * textKoordinaten[i][1] + "px";
+            }
         }
 
         function positionCirclesAndOverlays() {
