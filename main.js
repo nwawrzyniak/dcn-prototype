@@ -22,7 +22,8 @@
 
 /**
  * Das ist der DEBUG-Flag.
- * Wenn er auf true gesetzt ist, sind alle Boxen immer sichtbar. Dadurch kann man sie leichter positionieren.
+ * Wenn er auf true gesetzt ist, sind alle Boxen immer sichtbar.
+ * Dadurch kann man sie leichter positionieren.
  * Ersetz hier also einfach false durch true, wenn du Elemente positionieren willst.
  * Nach getaner Arbeit sollte dieser Flag wieder auf false gesetzt werden.
  */
@@ -32,8 +33,9 @@ const DEBUG = false;
  * Hier kommen die Koordinaten der Kreise rein.
  * Es sollte genau so viele Einträge geben, wie es interaktive Objekte gibt.
  * Die Koordinaten sind im Format [X, Y] Werte zwischen 0 und 1.
- * 0 im X-Feld heißt "ganz links", 1 im X-Feld heißt "ganz rechts". 
- * 0 im Y-Feld heißt "ganz oben", 1 im Y-Feld heißt "ganz unten". 
+ * 0 im X-Feld heißt "ganz links", 1 im X-Feld heißt "ganz rechts".
+ * 0 im Y-Feld heißt "ganz oben", 1 im Y-Feld heißt "ganz unten".
+ * Die letzte Zeile sollte kein Komma am Ende haben.
  */
 const kreisKoordinaten = [
     [0.47, 0.80], // Flyer
@@ -68,91 +70,74 @@ const textKoordinaten = [
 // GEFAHRENGRENZE!
 // AB HIER NIX ANFASSEN!
 
-function onLoad() {
-    const deskImage = document.querySelector(".bild_desktop");
-    deskImage.onload = function () {
-        const circles = document.querySelectorAll(".kreis");
-        const overlays = document.querySelectorAll(".text");
-        let current;
-
-        if (DEBUG) {
-            overlays.forEach(element => {
-                element.style.display = "inline-block";
-            });
-        }
-
-        function handleOverlay(overlay) {
-            if (!DEBUG) {
-                function toggle() {
-                    if (current) {
-                        current.style.display = "none";
-                        if (current === overlay) {
-                            current = null;
-                            return;
-                        }
-                    }
-                    current = overlay;
-                    current.style.display = "inline-block";
-                }
-                return toggle;
-            } else {
-                // ToDo
-            }
-        }
-
-        function deactivateOverlays() {
-            if (current != null) {
-                current.style.display = "none";
-                current = null;
-            }
-        }
-
-        for (let i = 0; i < circles.length; i++) {
-            circles[i].addEventListener("click", handleOverlay(overlays[i]));
-        }
-
-        if (!DEBUG) {
-            deskImage.addEventListener("click", deactivateOverlays);
-        }
-
-        function positionCircles() {
-            const rect = deskImage.getBoundingClientRect();
-            const width = rect.width;
-            const height = rect.height;
-            for (let i = 0; i < circles.length; i++) {
-                circles[i].style.left = width * kreisKoordinaten[i][0] + rect.left + "px";
-                circles[i].style.top = height * kreisKoordinaten[i][1] + 'px';
-            }
-        }
-
-        function positionOverlays() {
-            const rect = deskImage.getBoundingClientRect();
-            const width = rect.width;
-            const height = rect.height;
-            for (let i = 0; i < overlays.length; i++) {
-                overlays[i].style.left = width * textKoordinaten[i][0] + rect.left + "px";
-                overlays[i].style.top = height * textKoordinaten[i][1] + "px";
-            }
-        }
-
-        function positionCirclesAndOverlays() {
-            positionCircles();
-            positionOverlays();
-        }
-
-        window.addEventListener("resize", positionCirclesAndOverlays);
-        positionCirclesAndOverlays();
-    };
-
-    // In case the image is already cached and loaded
-    if (deskImage.complete) {
-        // Trigger the onload event manually
-        deskImage.onload();
+function positionElements(deskImage, circles, overlays) {
+    const rect = deskImage.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].style.left = width * kreisKoordinaten[i][0] + rect.left + "px";
+        circles[i].style.top = height * kreisKoordinaten[i][1] + "px";
+    }
+    for (let i = 0; i < overlays.length; i++) {
+        overlays[i].style.left = width * textKoordinaten[i][0] + rect.left + "px";
+        overlays[i].style.top = height * textKoordinaten[i][1] + "px";
     }
 }
 
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", onLoad);
-} else {
-    onLoad();
+function onLoad() {
+    const deskImage = document.querySelector(".bild_desktop");
+    const circles = document.querySelectorAll(".kreis");
+    const overlays = document.querySelectorAll(".text");
+
+    if (DEBUG) {
+        overlays.forEach(element => {
+            element.style.display = "inline-block";
+        });
+    }
+
+    let current;
+
+    function handleOverlay(overlay) {
+        if (!DEBUG) {
+            return function toggle() {
+                if (current) {
+                    current.style.display = "none";
+                    if (current === overlay) {
+                        current = null;
+                        return;
+                    }
+                }
+                current = overlay;
+                current.style.display = "inline-block";
+            };
+        } else {
+            return function toggleDebug() {
+                overlay.style.display = overlay.style.display === "none" ? "inline-block" : "none";
+            };
+        }
+    }
+
+    function deactivateOverlays() {
+        if (current != null) {
+            current.style.display = "none";
+            current = null;
+        }
+    }
+
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].addEventListener("click", handleOverlay(overlays[i]));
+    }
+
+    if (!DEBUG) {
+        deskImage.addEventListener("click", deactivateOverlays);
+    }
+
+    function positionCirclesAndOverlays() {
+        positionElements(deskImage, circles, overlays);
+    }
+
+    window.addEventListener("resize", positionCirclesAndOverlays);
+    positionCirclesAndOverlays();
 }
+
+window.onload = onLoad;
