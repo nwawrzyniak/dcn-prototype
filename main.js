@@ -13,7 +13,7 @@
  * - Im HTML das Bild austauschen
  * - Durchzählen, wie viele interaktive Elemente es geben wird
  * - So viele Kreise im HTML anlegen
- * - Die dazugehörigen Texte ("Overlays") im HTML anlegen
+ * - Die dazugehörigen Texte im HTML anlegen
  * 
  * Wenn im HTML alles angepasst und vorbereitet ist, kann es losgehen! :)
  */
